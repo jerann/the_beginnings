@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
+import 'CommentBox.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -90,7 +91,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     );
                   },
                 ))),
-        Expanded(flex: 36, child: Container(color: Colors.green)),
+        Expanded(flex: 36, child: Container(color: Colors.green, child: CommentBox(),)),
       ])),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
