@@ -26,8 +26,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
   VideoPlayerController _videoController;
 
   @override
@@ -46,12 +44,6 @@ class _MyHomePageState extends State<MyHomePage> {
     _videoController.setLooping(true);
   }
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,41 +52,46 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Center(
           child: Column(children: [
-            Expanded(
-                flex: 24,
-                child: Container(
-                    color: Colors.blueAccent,
-                    child: _videoController.value.initialized
-                        ? AspectRatio(
-                      aspectRatio: _videoController.value.aspectRatio,
-                      child: VideoPlayer(_videoController),
-                    )
-                        : Container())),
-            Expanded(
-                flex: 1,
-                child: Container(
-                    color: Colors.black,
-                    alignment: Alignment.centerLeft,
-                    child: LayoutBuilder(builder: (context, constraints) {
-                      return Row(
-                        children: <Widget>[
-                          SizedBox(
-                            width: constraints.maxWidth * (_videoController
-                                .value.position.inMilliseconds /
-                                _videoController.value.duration.inMilliseconds),
-                            child: Container(color: Colors.red),
+        Expanded(
+            flex: 24,
+            child: Container(
+                color: Colors.blueAccent,
+                child: _videoController.value.initialized
+                    ? AspectRatio(
+                        aspectRatio: _videoController.value.aspectRatio,
+                        child: VideoPlayer(_videoController),
+                      )
+                    : Container())),
+        Expanded(
+            flex: 1,
+            child: Container(
+                color: Colors.black,
+                alignment: Alignment.centerLeft,
+                child: LayoutBuilder(
+                  builder: (context, constraints) {
+                    return Row(
+                      children: <Widget>[
+                        SizedBox(
+                          width: constraints.maxWidth *
+                              (_videoController.value.position.inMilliseconds /
+                                  _videoController
+                                      .value.duration.inMilliseconds),
+                          child: Container(color: Colors.red),
+                        ),
+                        SizedBox(
+                          height: constraints.maxHeight,
+                          width: constraints.maxHeight,
+                          child: Container(
+                            decoration: BoxDecoration(
+                                color: Colors.white, shape: BoxShape.circle),
                           ),
-                          SizedBox(
-                            height: constraints.maxHeight,
-                            width: constraints.maxHeight,
-                            child: Container(decoration: BoxDecoration(color: Colors.white, shape: BoxShape.circle),)
-                          )
-                        ],
-                      );
-                    },)
-                )),
-            Expanded(flex: 36, child: Container(color: Colors.green))
-          ])),
+                        )
+                      ],
+                    );
+                  },
+                ))),
+        Expanded(flex: 36, child: Container(color: Colors.green)),
+      ])),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           _videoController.value.isPlaying
