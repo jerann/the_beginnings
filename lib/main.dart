@@ -92,26 +92,6 @@ class _MyHomePageState extends State<MyHomePage> {
                         ],
                       );
                     },)
-
-//                    Stack(
-//                      fit: StackFit.expand,
-//                      children: <Widget>[
-//                        _videoController.value.position == null
-//                            ? Container()
-//                            : FractionallySizedBox(
-//                            alignment: Alignment.centerLeft,
-//                            widthFactor: _videoController
-//                                .value.position.inMilliseconds /
-//                                _videoController.value.duration.inMilliseconds,
-//                            heightFactor: 1,
-//                            child:
-//                            Container(color: Colors.blue[800],
-//                                child: Container(
-//                                  alignment: Alignment.centerRight, decoration
-//                                  : BoxDecoration(shape: BoxShape.circle, color: Colors.grey),))
-//                        )
-//                      ],
-//                    )
                 )),
             Expanded(flex: 36, child: Container(color: Colors.green))
           ])),
