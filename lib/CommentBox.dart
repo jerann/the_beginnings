@@ -8,45 +8,64 @@ class CommentBox extends StatefulWidget {
 class _CommentBoxState extends State<CommentBox> {
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.black12,
+      ),
+      child: Row(
+        children: <Widget>[
+          Column(
+            mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              Icon(
-                Icons.face,
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Icon(
+                  Icons.face,
+                ),
               ),
             ],
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Container(
-            color: Colors.grey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Row(
-                  children: <Widget>[Text("User Name")],
-                ),
-                Row(
-                  mainAxisSize: MainAxisSize.min,
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: Row(
                   children: <Widget>[
-                    Text("Comment Text"),
+                    Text(
+                      "User Name",
+                      style: TextStyle(fontSize: 12),
+                    ),
                   ],
                 ),
-                Row(
+              ),
+              Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: Row(
                   children: <Widget>[
-                    Icon(Icons.thumb_up),
-                    Icon(Icons.thumb_down),
+                    Text(
+                      "Comment Text",
+                    ),
                   ],
-                )
-              ],
-            ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: SizedBox(
+                  width: 75,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Icon(Icons.thumb_up),
+                      Icon(Icons.thumb_down),
+                    ],
+                  ),
+                ),
+              ),
+            ],
           ),
-        )
-      ],
+        ],
+      ),
     );
   }
 }
