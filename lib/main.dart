@@ -52,47 +52,61 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-          child: Column(children: [
-        Expanded(
+        child: Column(children: [
+          Expanded(
             flex: 24,
             child: Container(
-                color: Colors.blueAccent,
-                child: _videoController.value.initialized
-                    ? AspectRatio(
-                        aspectRatio: _videoController.value.aspectRatio,
-                        child: VideoPlayer(_videoController),
-                      )
-                    : Container())),
-        Expanded(
+              color: Colors.blueAccent,
+              child: _videoController.value.initialized
+                  ? AspectRatio(
+                      aspectRatio: _videoController.value.aspectRatio,
+                      child: VideoPlayer(_videoController),
+                    )
+                  : Container(),
+            ),
+          ),
+          Expanded(
             flex: 1,
             child: Container(
-                color: Colors.black,
-                alignment: Alignment.centerLeft,
-                child: LayoutBuilder(
-                  builder: (context, constraints) {
-                    return Row(
-                      children: <Widget>[
-                        SizedBox(
-                          width: constraints.maxWidth *
-                              (_videoController.value.position.inMilliseconds /
-                                  _videoController
-                                      .value.duration.inMilliseconds),
-                          child: Container(color: Colors.red),
+              color: Colors.black,
+              alignment: Alignment.centerLeft,
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  return Row(
+                    children: <Widget>[
+                      SizedBox(
+                        width: constraints.maxWidth *
+                            (_videoController.value.position.inMilliseconds /
+                                _videoController.value.duration.inMilliseconds),
+                        child: Container(color: Colors.red),
+                      ),
+                      SizedBox(
+                        height: constraints.maxHeight,
+                        width: constraints.maxHeight,
+                        child: Container(
+                          decoration: BoxDecoration(
+                              color: Colors.white, shape: BoxShape.circle),
                         ),
-                        SizedBox(
-                          height: constraints.maxHeight,
-                          width: constraints.maxHeight,
-                          child: Container(
-                            decoration: BoxDecoration(
-                                color: Colors.white, shape: BoxShape.circle),
-                          ),
-                        )
-                      ],
-                    );
-                  },
-                ))),
-        Expanded(flex: 36, child: Container(color: Colors.green, child: CommentBox(),)),
-      ])),
+                      ),
+                    ],
+                  );
+                },
+              ),
+            ),
+          ),
+          Expanded(
+            flex: 36,
+            child: Container(
+              color: Colors.green,
+              child: ListView(
+                children: [
+                  CommentBox(),
+                ],
+              ),
+            ),
+          ),
+        ]),
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           _videoController.value.isPlaying
