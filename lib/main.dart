@@ -45,6 +45,12 @@ class _MyHomePageState extends State<MyHomePage> {
     _videoController.setLooping(true);
   }
 
+  _toggleVideoPlayback() {
+    _videoController.value.isPlaying
+        ? _videoController.pause()
+        : _videoController.play();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,14 +61,17 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(children: [
           Expanded(
             flex: 24,
-            child: Container(
-              color: Colors.blueAccent,
-              child: _videoController.value.initialized
-                  ? AspectRatio(
-                      aspectRatio: _videoController.value.aspectRatio,
-                      child: VideoPlayer(_videoController),
-                    )
-                  : Container(),
+            child: GestureDetector(
+              onTap: _toggleVideoPlayback,
+              child: Container(
+                color: Colors.blueAccent,
+                child: _videoController.value.initialized
+                    ? AspectRatio(
+                        aspectRatio: _videoController.value.aspectRatio,
+                        child: VideoPlayer(_videoController),
+                      )
+                    : Container(),
+              ),
             ),
           ),
           Expanded(
@@ -75,9 +84,14 @@ class _MyHomePageState extends State<MyHomePage> {
                   return Row(
                     children: <Widget>[
                       SizedBox(
-                        width: constraints.maxWidth *
-                            (_videoController.value.position.inMilliseconds /
-                                _videoController.value.duration.inMilliseconds),
+                        width: _videoController.value.position !=
+                                Duration(seconds: 0)
+                            ? constraints.maxWidth *
+                                (_videoController
+                                        .value.position.inMilliseconds /
+                                    _videoController
+                                        .value.duration.inMilliseconds)
+                            : 0,
                         child: Container(color: Colors.red),
                       ),
                       SizedBox(
@@ -100,7 +114,9 @@ class _MyHomePageState extends State<MyHomePage> {
               color: Colors.green,
               child: ListView(
                 children: [
-                  CommentBox(),
+                  CommentBox(
+                    userName: "falafelSandwich",
+                  ),
                 ],
               ),
             ),
@@ -108,14 +124,8 @@ class _MyHomePageState extends State<MyHomePage> {
         ]),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          _videoController.value.isPlaying
-              ? _videoController.pause()
-              : _videoController.play();
-        },
-        tooltip: _videoController.value.isPlaying ? "Pause" : "Play",
-        child: Icon(
-            _videoController.value.isPlaying ? Icons.pause : Icons.play_arrow),
+        onPressed: () {},
+        child: Icon(Icons.add),
       ),
     );
   }
