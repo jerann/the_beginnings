@@ -1,6 +1,15 @@
 import 'package:flutter/material.dart';
 
 class CommentBox extends StatefulWidget {
+  final String userName;
+  final String comment;
+
+  CommentBox({
+    Key key,
+    this.userName,
+    this.comment,
+  }) : super(key: key);
+
   @override
   _CommentBoxState createState() => _CommentBoxState();
 }
@@ -33,7 +42,7 @@ class _CommentBoxState extends State<CommentBox> {
                 child: Row(
                   children: <Widget>[
                     Text(
-                      "User Name",
+                      widget.userName != null ? widget.userName : "User Name",
                       style: TextStyle(fontSize: 12),
                     ),
                   ],
@@ -44,7 +53,7 @@ class _CommentBoxState extends State<CommentBox> {
                 child: Row(
                   children: <Widget>[
                     Text(
-                      "Comment Text",
+                      widget.comment != null ? widget.comment : "Comment Text",
                     ),
                   ],
                 ),
